@@ -96,7 +96,7 @@ To test further, consider using VPN services to simulate requests from different
 
 1. Clone the Repository
       ```bash
-      git clone https://github.com/your-repo/aws-iac-cdn-multi-region-poc.git
+      git clone https://github.com/efficient-solutions/aws-iac-cdn-multi-region-poc.git
       cd aws-iac-cdn-multi-region-poc
       ```
 
