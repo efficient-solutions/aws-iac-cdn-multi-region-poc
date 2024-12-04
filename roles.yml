@@ -1,0 +1,63 @@
+# IaC CDN Multi-Region PoC for AWS
+#
+# Filename: roles.yml
+# Copyright (c) 2024 Efficient Solutions LLC
+#
+# This software is licensed under the MIT License.
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: |
+  Configure the AWSCloudFormationStackSetAdministrationRole and AWSCloudFormationStackSetExecutionRole
+  roles to enable use of AWS CloudFormation StackSets.
+
+Parameters:
+  AdministrationRoleName:
+    Type: String
+    Default: AWSCloudFormationStackSetAdministrationRole
+    Description: The name of the administration role. Defaults to AWSCloudFormationStackSetAdministrationRole.
+  ExecutionRoleName:
+    Type: String
+    Default: AWSCloudFormationStackSetExecutionRole
+    Description: The name of the execution role that can assume this role. Defaults to AWSCloudFormationStackSetExecutionRole.
+
+Resources:
+  AdministrationRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Ref AdministrationRoleName
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: cloudformation.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+      Policies:
+        - PolicyName: AssumeRole-AWSCloudFormationStackSetExecutionRole
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - sts:AssumeRole
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:iam::*:role/${ExecutionRoleName}"
+
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Ref ExecutionRoleName
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS:
+                - !Ref 'AWS::AccountId'
+            Action:
+              - sts:AssumeRole
+      Path: /
+      ManagedPolicyArns:
+        - !Sub "arn:${AWS::Partition}:iam::aws:policy/AdministratorAccess"
