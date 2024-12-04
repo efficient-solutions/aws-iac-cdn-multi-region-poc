@@ -13,12 +13,13 @@ This project demonstrates a multi-region **Content Delivery Network (CDN)** arch
 1. [Features](#features)
 2. [Architecture](#architecture)
 3. [Key Concepts](#key-concepts)
-4. [Limitations](#limitations)
-5. [Usage](#usage)
-6. [Cleanup](#cleanup)
-7. [Geodata](#geodata)
-8. [License](#license)
-9. [Disclaimer](#disclaimer)
+4. [Demo](#demo)
+5. [Limitations](#limitations)
+6. [Usage](#usage)
+7. [Cleanup](#cleanup)
+8. [Geodata](#geodata)
+9. [License](#license)
+10. [Disclaimer](#disclaimer)
 
 ## Features
 
@@ -60,6 +61,21 @@ The CloudFront Function determines:
 - Fully reproducible using AWS CloudFormation templates.
 - Version-controlled for consistency and scalability.
 - Ensures environments are predictable across deployments.
+
+## Demo
+
+To showcase the functionality of dynamic routing, we have deployed the stack in the following AWS regions: `us-east-1`, `eu-central-1`, `ap-southeast-2`, and `sa-east-1`.
+
+Each region hosts a unique image file labeled with the region's name. When you access the [CloudFront distribution URL](https://efficient.solutions/link/npzmv/) in your browser, the system dynamically routes your request to the nearest region based on your geographic location. The image displayed will confirm the region that served your request.
+
+### Example:
+
+- A user in North America will see an image labeled us-east-1.
+- A user in Europe will see an image labeled eu-central-1.
+
+This demo highlights the system's ability to optimize content delivery by minimizing latency through geoproximity-based routing.
+
+To test further, consider using VPN services to simulate requests from different locations around the globe.
 
 ## Limitations
 
@@ -157,7 +173,7 @@ aws cloudformation delete-stack-set \
 
 ## Geodata
 
-This project uses the following geographic coordinate to determine the closest origin.
+This project uses the following geographic coordinates to determine the closest origin.
 
 ### Countries
 
