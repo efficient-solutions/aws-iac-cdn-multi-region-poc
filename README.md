@@ -18,8 +18,9 @@ This project demonstrates a multi-region **Content Delivery Network (CDN)** arch
 6. [Usage](#usage)
 7. [Cleanup](#cleanup)
 8. [Geodata](#geodata)
-9. [License](#license)
-10. [Disclaimer](#disclaimer)
+9. [Extended Version](#extended-version)
+10. [License](#license)
+11. [Disclaimer](#disclaimer)
 
 ## Features
 
@@ -411,6 +412,16 @@ This project uses the following geographic coordinates to determine the closest 
   'sa-east-1': { lat: -23.5505, lon: -46.6333 }, // São Paulo, Brazil
 }
 ```
+
+## Extended Version
+
+We also offer a [commercial version](https://efficient.solutions/aws-iac-cdn-multi-region/) of this solution with the following enhancements:
+
+- **Automatic Content Replication:** Automated synchronization of static files between primary and additional S3 buckets, simplifying content management across regions.
+- **Custom Domain Support:** Seamless integration with Route 53 and AWS Certificate Manager (ACM) to use custom domains with HTTPS.
+- **Access Logging:** CloudFront access logs enabled for detailed insights into user activity and performance metrics.
+
+This version provides additional flexibility and enhanced management features for more complex use cases.
 
 ## License
 
